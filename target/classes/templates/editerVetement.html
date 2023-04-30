@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+	<meta charset="utf-8">
+	<title>Ajout des Vetements</title>
+</head>
+
+<body>
+	<div th:replace="template"></div>
+		<div class="container mt-5">
+			<div class="card">
+				<div class="card-header"> modifier des Vetements </div>
+				<div class="card-body">
+					<form th:action="@{saveVetement}" method="post">
+						<div class="form-group">
+							<label class="control-label" hidden>ID Produit :</label>
+ 							<input type="hidden" name="idvetement" class="form-control" />
+ 							<span th:errors= ${Vetement.idvetement} class="text-danger"> </span>
+								</div>
+						<div class="form-group">
+							<label class="control-label">Nom Vetement :</label>
+							<input type="text" name="nomvetement" class="form-control" />
+							<span th:errors= ${Vetement.nomvetement} class="text-danger"> </span>
+
+						</div>
+						<div class="form-group">
+							<label class="control-label">taille :</label>
+							<input type="text" name="taille" class="form-control" />
+							<span th:errors= ${vetement.taille} class="text-danger"> </span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Prix Vetement :</label>
+							<input type="text" name="prixvetement" class="form-control"  />
+							<span th:errors= ${Vetement.prixvetement} class="text-danger"> </span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">date Production:</label>
+							<input type="date" name="dateprod" class="form-control" />
+							<span th:errors= ${Vetement.dateprod} class="text-danger"> </span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Sexe :</label> 
+							<select name="genres" class="form-control" th:value="${Vetement.Genres?.idG}"    >
+								<option th:each="g:${genres}" th:if="${mode=='edit'}" th:value="${g.idG}" th:text="${g.idG}" th:selected="${g.idG=={Vetement.Genres.idG}"></option>
+
+								<option th:each="g:${genres}" th:if="${mode=='new'}"
+									th:value="${g.idG}" th:text="${g.idG}"></option>
+							</select>
+							
+						
+						
+							
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary">Valider</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
